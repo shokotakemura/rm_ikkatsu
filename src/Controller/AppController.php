@@ -45,29 +45,29 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->viewBuilder()->layout('common');
 
-        // $this->loadComponent('Auth', [ // Authコンポーネントの読み込み
-        //     'authenticate' => [
-        //         'Form' => [ // 認証の種類を指定。Form,Basic,Digestが使える。デフォルトはForm
-        //             'fields' => [ // ユーザー名とパスワードに使うカラムの指定。省略した場合はusernameとpasswordになる
-        //                 'username' => 'mail', // ユーザー名のカラムを指定
-        //                 'password' => 'password' //パスワードに使うカラムを指定
-        //             ]
-        //         ]
-        //     ],
-        //     'loginAction' => [
-        //         'controller' => 'Admins',
-        //         'action' => 'login',
-        //     ],
-        //     'loginRedirect' => [ // ログイン後に遷移するアクションを指定
-        //         'controller' => 'Vendors',
-        //         'action' => 'index'
-        //     ],
-        //     'logoutRedirect' => [ // ログアウト後に遷移するアクションを指定
-        //         'controller' => 'Admins',
-        //         'action' => 'login',
-        //     ],
-        //     'authError' => 'ログインできませんでした。ログインしてください。', // ログインに失敗したときのFlashメッセージを指定(省略可)
-        // ]);
+        $this->loadComponent('Auth', [ // Authコンポーネントの読み込み
+            'authenticate' => [
+                'Form' => [ // 認証の種類を指定。Form,Basic,Digestが使える。デフォルトはForm
+                    'fields' => [ // ユーザー名とパスワードに使うカラムの指定。省略した場合はusernameとpasswordになる
+                        'username' => 'mail', // ユーザー名のカラムを指定
+                        'password' => 'password' //パスワードに使うカラムを指定
+                    ]
+                ]
+            ],
+            'loginAction' => [
+                'controller' => 'Admins',
+                'action' => 'login',
+            ],
+            'loginRedirect' => [ // ログイン後に遷移するアクションを指定
+                'controller' => 'Vendors',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [ // ログアウト後に遷移するアクションを指定
+                'controller' => 'Admins',
+                'action' => 'login',
+            ],
+            'authError' => 'ログインできませんでした。ログインしてください。', // ログインに失敗したときのFlashメッセージを指定(省略可)
+        ]);
     }
 
     /**
