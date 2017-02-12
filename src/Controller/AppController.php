@@ -45,7 +45,7 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->viewBuilder()->layout('common');
 
-        $this->loadComponent('Auth', [ // Authコンポーネントの読み込み
+/*        $this->loadComponent('Auth', [ // Authコンポーネントの読み込み
             'authenticate' => [
                 'Form' => [ // 認証の種類を指定。Form,Basic,Digestが使える。デフォルトはForm
                     'fields' => [ // ユーザー名とパスワードに使うカラムの指定。省略した場合はusernameとpasswordになる
@@ -67,7 +67,7 @@ class AppController extends Controller
                 'action' => 'login',
             ],
             'authError' => 'ログインできませんでした。ログインしてください。', // ログインに失敗したときのFlashメッセージを指定(省略可)
-        ]);
+        ]);*/
     }
 
     /**
