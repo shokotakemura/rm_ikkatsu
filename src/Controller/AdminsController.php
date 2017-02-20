@@ -4,7 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 class AdminsController extends AppController
-{
+  {
     public function login(){
         $title = "ログイン";
         $this->viewBuilder()->layout('login');
