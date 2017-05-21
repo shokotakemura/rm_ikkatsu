@@ -2,7 +2,7 @@
   <h1 class="col m12 title"><?= h($title); ?></h1>
 </div>
 
-<?= $this->Form->create($vendor = null); ?>
+<?= $this->Form->create($vendor); ?>
   <table class="table tableEdit">
     <tbody>
       <tr>

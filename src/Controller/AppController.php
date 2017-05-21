@@ -41,6 +41,9 @@ class AppController extends Controller
     {
         parent::initialize();
 
+        //どのControllerでもSessionを利用できるようにする
+        $this->Session = $this->request->session();
+
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->viewBuilder()->layout('common');
@@ -83,5 +86,13 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+    }
+
+    public function statusWord($val){
+      switch($val){
+        case 1:
+          return 'aaa';
+          break;
+      }
     }
 }

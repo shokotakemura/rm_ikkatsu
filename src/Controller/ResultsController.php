@@ -48,7 +48,7 @@ class VendorsController extends AppController
         'contain' => ['ClientCps'],
       ]);
 
-      $result->matter_summary = $matter->summary;
+
       $result->client_id = $clientRep->client_cp->id;
       $result->client_name = $clientRep->client_cp->name;
     }

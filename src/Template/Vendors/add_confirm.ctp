@@ -1,5 +1,5 @@
 <div class="row">
-  <h1 class="col m12 title">入力内容確認</h1>
+  <h1 class="col m12 title"><?= h($title); ?></h1>
 </div>
 
 <?= $this->Form->create($vendor); ?>
@@ -7,13 +7,15 @@
     <tbody>
       <tr>
         <td>会社名</td>
-        <td><?= h($s); ?></td>
+        <td><?= h($vendor->name); ?></td>
       </tr>
     </tbody>
   </table>
+  <?= $this->Form->hidden('name'); ?>
 
   <div class="page pageShow">
     <?= $this->Html->link('戻る', ['action'=>'add']); ?>
-    <?= $this->Form->postLink('登録する', ['action'=>'addConfirm'], ['class'=>'btn pageShow_btn-edit']); ?>
+    <?= $this->Form->button('登録する', ['type' => 'submit', 'class'=>'btn pageShow_btn-edit']);
+       ?>
   </div>
 <?= $this->Form->end(); ?>

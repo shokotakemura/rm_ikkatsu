@@ -1,24 +1,36 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Admins'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="admins form large-9 medium-8 columns content">
-    <?= $this->Form->create($admin) ?>
-    <fieldset>
-        <legend><?= __('Add Admin') ?></legend>
-        <?php
-            echo $this->Form->input('id');
-            echo $this->Form->input('name');
-            echo $this->Form->input('password');
-            echo $this->Form->input('mail');
-            echo $this->Form->input('authority');
-            echo $this->Form->input('created_by');
-            echo $this->Form->input('modified_by');
-            echo $this->Form->input('delete_flag');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<div class="row">
+  <h1 class="col m12 title"><?= h($title); ?></h1>
 </div>
+
+<?= $this->Form->create($matter = null); ?>
+  <table class="table tableEdit">
+    <tbody>
+      <tr>
+        <td>管理ユーザ名</td>
+        <td><?= $this->Form->input('name', ['class'=>'tableEdit_input']) ?></td>
+      </tr>
+      <tr>
+        <td>パスワード</td>
+        <td><?= $this->Form->input('password', ['class'=>'tableEdit_input']) ?></td>
+      </tr>
+      <tr>
+        <td>メールアドレス</td>
+        <td><?= $this->Form->input('mail', ['class'=>'tableEdit_input']) ?></td>
+      </tr>
+      <tr>
+        <td>権限</td>
+        <td>
+          <?=$this->Form->select('authority',
+            [['value'=>'1','text'=>'一般ユーザー'],
+              ['value'=>'9','text'=>'最高管理者']],
+            ['class'=>'browser-default tableEdit_select']
+          ) ?>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page pageShow">
+    <?= $this->Form->button('確認する', ['class'=>'btn pageShow_btn-edit']); ?>
+  </div>
+<?= $this->Form->end(); ?>

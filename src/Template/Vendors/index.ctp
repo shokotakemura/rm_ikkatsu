@@ -1,8 +1,8 @@
 <div class="row">
-  <h1 class="col m12 title">ベンダー一覧</h1>
+  <h1 class="col m12 title"><?= h($title); ?></h1>
 </div>
 
-<?= $this->Form->create($vendor = null); ?>
+<?= $this->Form->create($edit);?>
   <table class="bordered highlight table tableIndex">
     <thead>
       <tr>
@@ -16,11 +16,12 @@
     <tbody>
       <?php foreach ($vendors as $vendor) : ?>
         <tr>
-          <td><?= h($vendor->id); ?></td>
+          <td><?= $this->Html->link($vendor->id,['action'=>'view', $vendor->id]); ?></td>
+          <?= $this->Form->hidden('Vendors.'.$vendor->id.'.id', ['value'=>$vendor->id]); ?>
           <td><?= $this->Html->link($vendor->name,['action'=>'view', $vendor->id]); ?></td>
           <td class="center">
-            <?= $this->Form->checkbox('delete_flag', $options=array('id'=>'check'.$vendor->id, 'value'=>'1', 'class'=>'tableIndex_deleteCheckbox')); ?>
-            <label for="check<?= $vendor->id ?>"></label>
+            <?= $this->Form->checkbox('Vendors.'.$vendor->id.'.delete_flag', $options=array('id'=>'delete_flag.'.$vendor->id, 'value'=>'1', 'class'=>'tableIndex_deleteCheckbox')); ?>
+            <label for="delete_flag.<?= $vendor->id ?>"></label>
           </td>
         </tr>
       <?php endforeach; ?>

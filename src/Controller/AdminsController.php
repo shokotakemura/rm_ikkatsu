@@ -25,41 +25,70 @@ class AdminsController extends AppController
 
   public function index()
   {
+    $this->loadComponent('Common');
+    $components = ['Common'];
+
     $title = "管理ユーザー一覧";
-    $admins = $this->Admins->find('all');
-    $this->set(compact('admins','title'));
+    $edit = $this->Admins->findByDeleteFlag(0);
+    $admins = $this->Admins->findByDeleteFlag(0);
+
+    foreach ($admins as $admin) {      
+      $admin->authority_word = $this->Common->adminsAuthorityWord($admin->authority);
+    }
+
+    $this->set(compact('admins', 'edit', 'title'));
+
+    if($this->request->is('put')){
+      foreach ($this->request->data as $d){
+        foreach ($d as $dd){
+          $admin = $this->Admins->get($dd['id']);
+          $delete = $this->Admins->patchEntity($admin, $dd);
+          $this->Admins->save($delete);
+        }
+      }
+      return $this->redirect(['action'=>'index']);
+    }
   }
 
   public function view($id = null)
   {
     $title = "管理ユーザー情報";
-    // $vendor = $this->Vendors->get($id);
-    $vendor = $this->Vendors->get($id, [
+    // $admin = $this->Admins->get($id);
+    $admin = $this->Admins->get($id, [
       'contain' => ['CreatedBy','ModifiedBy','Results'],
     ]);
-    $this->set(compact('vendor','title'));
+    $this->set(compact('admin','title'));
   }
 
   public function add(){
     $title = "管理ユーザー登録";
-    $vendor = $this->Vendors->newEntity();
+    $admin = $this->Admins->newEntity();
+    $this->set(compact('admin', 'title'));
     if($this->request->is('post')){
-      $vendor = $this->Vendors->patchEntity($vendor, $this->request->data);
-      $this->request->session()->write('s', $vendor->name);
+      $this->request->session()->write('Admin', $this->request->data);
       return $this->redirect(['action'=>'addConfirm']);
     }
-    $this->set(compact('vendor'));
   }
 
   public function addConfirm(){
+    //ブラウザに表示
     $title = "入力内容確認";
-    $s = $this->request->session()->read('s');
-    // if($this->request->is('post')){
-    //   $vendor = $this->Vendors->patchEntity($vendor, $this->request->data);
-    //   $this->Vendors->save($vendor);
-    //   return $this->redirect(['action'=>'index']);
-    // }
-    $this->set(compact('vendor','s'));
+    $admin_array = $this->request->session()->read('Admin');
+    $admin = (object)$admin_array;
+    $this->set(compact('admin','title'));
+
+    if($this->request->is('post')){
+      $admin_add = $this->Admins->newEntity();
+      $admin_add = $this->Admins->patchEntity($admin_add, $admin_array); 
+      $this->Admins->save($admin_add);
+      return $this->redirect(['action'=>'index']);
+    }else if($this->request->is('put')){
+      //$addAdmin = $this->Admins->newEntity();
+      $addAdmin = $this->Admins->patchEntity($admin, $this->request->data);
+      //debug($addAdmin);
+      $this->Admins->save($addAdmin);
+      return $this->redirect(['action'=>'index']);
+    }
   }
 
 }

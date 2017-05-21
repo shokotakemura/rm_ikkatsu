@@ -4,7 +4,7 @@ namespace App\Model\Table;
 
 use Cake\ORM\Table;
 
-class VendorsTable extends Table
+class ClientCpsTable extends Table
 {
   public function initialize(array $config)
   {
@@ -19,7 +19,7 @@ class VendorsTable extends Table
       'foreignKey'=>'modified_by',
       'propertyName'=>'modified_by',
     ]);
-    $this->hasMany('Results');
+    $this->hasMany('ClientReps');
   }
 }
 
